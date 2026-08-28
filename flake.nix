@@ -24,13 +24,15 @@
   };
 
   outputs =
-    inputs @ { self
-    , nixpkgs
-    , flake-parts
-    , rust-overlay
-    , crate2nix
-    , ...
-    }: flake-parts.lib.mkFlake { inherit inputs; } {
+    inputs@{
+      self,
+      nixpkgs,
+      flake-parts,
+      rust-overlay,
+      crate2nix,
+      ...
+    }:
+    flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [
         "x86_64-linux"
         "aarch64-linux"
@@ -43,14 +45,23 @@
         ./nix/devshell/flake-module.nix
       ];
 
-      perSystem = { system, pkgs, lib, inputs', ... }:
+      perSystem =
+        {
+          system,
+          pkgs,
+          lib,
+          inputs',
+          ...
+        }:
         let
-          # If you dislike IFD, you can also generate it with `crate2nix generate` 
+          # If you dislike IFD, you can also generate it with `crate2nix generate`
           # on each dependency change and import it here with `import ./Cargo.nix`.
-          cargoNix = inputs.crate2nix.tools.${system}.appliedCargoNix {
-            name = "rustnix";
-            src = ./.;
-          };
+          ##cargoNix = inputs.crate2nix.tools.${system}.appliedCargoNix {
+          ##  name = "rustnix";
+          ##  src = ./.;
+          ##};
+
+          cargoNix = import ./Cargo.nix;
         in
         rec {
           checks = {

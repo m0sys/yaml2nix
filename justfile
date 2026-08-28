@@ -3,6 +3,6 @@ default:
 	@just --list
 
 regen-cargo-nix:
-	rm Cargo.nix
+	rm -f Cargo.nix
 	nix run nixpkgs#crate2nix -- generate
 
