@@ -1,16 +1,19 @@
 {
   inputs = {
-    cargo2nix.url = "github:cargo2nix/cargo2nix/release-0.11.0";
+    cargo2nix.url = "github:cargo2nix/cargo2nix/release-0.12";
     flake-utils.follows = "cargo2nix/flake-utils";
     nixpkgs.follows = "cargo2nix/nixpkgs";
   };
 
-  outputs = inputs: with inputs;
-    flake-utils.lib.eachDefaultSystem (system:
+  outputs =
+    inputs:
+    with inputs;
+    flake-utils.lib.eachDefaultSystem (
+      system:
       let
         pkgs = import nixpkgs {
           inherit system;
-          overlays = [cargo2nix.overlays.default];
+          overlays = [ cargo2nix.overlays.default ];
         };
 
         rustPkgs = pkgs.rustBuilder.makePackageSet {
@@ -18,9 +21,10 @@
           packageFun = import ./Cargo.nix;
         };
 
-      in rec {
+      in
+      rec {
         packages = {
-          yaml2nix = (rustPkgs.workspace.yaml2nix {}).bin;
+          yaml2nix = (rustPkgs.workspace.yaml2nix { }).bin;
           default = packages.yaml2nix;
         };
       }
