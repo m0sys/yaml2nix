@@ -1,1 +1,11 @@
-{ escapes = { newline = "\n"; slash = "\\"; "-_-" = "-_-"; dolla = "dolla $"; dolla2 = "\${}"; unquoted_key_with_underscores = "value"; unquoted-key_with-quote' = 1; }; }
+{
+  escapes = {
+    newline = "\n";
+    slash = "\\";
+    "-_-" = "-_-";
+    dolla = "dolla $";
+    dolla2 = "\${}";
+    unquoted_key_with_underscores = "value";
+    unquoted-key_with-quote' = 1;
+  };
+}
