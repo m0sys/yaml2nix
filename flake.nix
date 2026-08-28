@@ -61,7 +61,7 @@
           ##  src = ./.;
           ##};
 
-          cargoNix = import ./Cargo.nix;
+          cargoNix = import ./Cargo.nix { inherit pkgs; };
         in
         rec {
           checks = {
