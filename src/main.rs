@@ -3,7 +3,7 @@ use std::io::Read;
 fn main() {
     let file_name = &std::env::args().collect::<Vec<_>>()[1];
     let mut file = std::fs::File::open(file_name).expect("could not open file");
-    // serde_yaml doesn't support multi-document yaml, so split it up for it ourselves.
+    // yaml_serde doesn't support multi-document yaml, so split it up for it ourselves.
     let mut document = String::new();
     file.read_to_string(&mut document).unwrap();
 
@@ -20,10 +20,10 @@ fn convert_doc(document: String) -> String {
     // Trim empty documents, best effort.
     let documents: Vec<_> = documents.iter().filter(|d| d.trim() != "").collect();
 
-    let docs: serde_yaml::Sequence = documents
+    let docs: yaml_serde::Sequence = documents
         .iter()
         .filter_map(|document| {
-            match serde_yaml::from_str(&document) {
+            match yaml_serde::from_str(&document) {
                 Ok(doc) => Some(doc),
                 Err(e) if format!("{:?}", e) == "EndOfStream" => {
                     // An empty document can result in this; let's assume it's non-fatal
