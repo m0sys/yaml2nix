@@ -1,9 +1,10 @@
 use std::io::Read;
+use serde::Deserialize;
+use yaml_serde::Value;
 
 fn main() {
     let file_name = &std::env::args().collect::<Vec<_>>()[1];
     let mut file = std::fs::File::open(file_name).expect("could not open file");
-    // serde_yaml doesn't support multi-document yaml, so split it up for it ourselves.
     let mut document = String::new();
     file.read_to_string(&mut document).unwrap();
 
@@ -11,19 +12,19 @@ fn main() {
 }
 
 fn convert_doc(document: String) -> String {
-    let lines: Vec<_> = document.lines().collect();
-    let documents: Vec<_> = lines
-        .split(|line| line.starts_with("---"))
-        .map(|lines| lines.join("\n"))
-        .collect();
+    //let lines: Vec<_> = document.lines().collect();
+    //let documents: Vec<_> = lines
+    //    .split(|line| line.starts_with("---"))
+    //    .map(|lines| lines.join("\n"))
+    //    .collect();
 
     // Trim empty documents, best effort.
-    let documents: Vec<_> = documents.iter().filter(|d| d.trim() != "").collect();
+    //let documents: Vec<_> = documents.iter().filter(|d| d.trim() != "").collect();
+    let deserializer = yaml_serde::Deserializer::from_str(&document);
 
-    let docs: serde_yaml::Sequence = documents
-        .iter()
+    let docs: yaml_serde::Sequence = deserializer
         .filter_map(|document| {
-            match serde_yaml::from_str(&document) {
+            match Value::deserialize(document) {
                 Ok(doc) => Some(doc),
                 Err(e) if format!("{:?}", e) == "EndOfStream" => {
                     // An empty document can result in this; let's assume it's non-fatal
