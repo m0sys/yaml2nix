@@ -11,4 +11,4 @@ serde = "1.0"
 yaml_serde = "0.10"
 serde-nix = { git = "https://github.com/euank/serde-nix.git" }
 rnix = "0.8.0"
-nixpkgs-fmt = "0.9.0"
+nixpkgs-fmt = "1.3.0"

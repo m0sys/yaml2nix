@@ -12,14 +12,6 @@ fn main() {
 }
 
 fn convert_doc(document: String) -> String {
-    //let lines: Vec<_> = document.lines().collect();
-    //let documents: Vec<_> = lines
-    //    .split(|line| line.starts_with("---"))
-    //    .map(|lines| lines.join("\n"))
-    //    .collect();
-
-    // Trim empty documents, best effort.
-    //let documents: Vec<_> = documents.iter().filter(|d| d.trim() != "").collect();
     let deserializer = yaml_serde::Deserializer::from_str(&document);
 
     let docs: yaml_serde::Sequence = deserializer
