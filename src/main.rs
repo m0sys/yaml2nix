@@ -36,11 +36,11 @@ fn convert_doc(document: String) -> String {
         }
         1 => {
             let nix_string = serde_nix::to_string(&docs[0]).unwrap();
-            nixpkgs_fmt::reformat_string(&nix_string)
+            nixfmt_rs::format(&nix_string).expect("shouldn't have any parse error")
         }
         _ => {
             let nix_string = serde_nix::to_string(&docs).unwrap();
-            nixpkgs_fmt::reformat_string(&nix_string)
+            nixfmt_rs::format(&nix_string).expect("shouldn't have any parse error")
         }
     }
 }
