@@ -1,5 +1,5 @@
-use std::io::Read;
 use serde::Deserialize;
+use std::io::Read;
 use yaml_serde::Value;
 
 fn main() {

@@ -652,3 +652,8 @@ dependencies = [
  "ryu",
  "serde",
 ]
+
+[[patch.unused]]
+name = "crossbeam-epoch"
+version = "0.9.20"
+source = "git+https://github.com/crossbeam-rs/crossbeam?tag=crossbeam-epoch-0.9.20#239bae00257967a109911b9ebe7c0554d6333501"
