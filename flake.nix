@@ -38,11 +38,7 @@
           inherit src;
           strictDeps = true;
 
-          # statix-ignore
-          buildInputs = [
-            # Add additional build inputs here
-          ]
-          ++ lib.optionals pkgs.stdenv.hostPlatform.isDarwin [
+          buildInputs = lib.optionals pkgs.stdenv.hostPlatform.isDarwin [
             # Additional darwin specific inputs can be set here
             pkgs.libiconv
           ];
