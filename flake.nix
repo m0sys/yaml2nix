@@ -38,6 +38,7 @@
           inherit src;
           strictDeps = true;
 
+          # statix-ignore
           buildInputs = [
             # Add additional build inputs here
           ]
