@@ -51,7 +51,7 @@ mod test {
 
     #[test]
     fn test_documents() {
-        for pairs in vec![
+        for pairs in [
             (
                 include_str!("testdata/deployment.yaml"),
                 include_str!("testdata/deployment.nix"),
