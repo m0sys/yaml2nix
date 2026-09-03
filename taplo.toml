@@ -1,1 +1,1 @@
-exclude = ["statix.toml"]
+exclude = [".github/workflows/statix.toml"]

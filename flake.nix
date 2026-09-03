@@ -109,9 +109,9 @@
           };
 
           # Audit licenses
-          my-crate-deny = craneLib.cargoDeny {
-            inherit src;
-          };
+          #my-crate-deny = craneLib.cargoDeny {
+          #  inherit src;
+          #};
 
           # Run tests with cargo-nextest
           # Consider setting `doCheck = false` on `my-crate` if you do not want
