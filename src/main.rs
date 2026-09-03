@@ -1,5 +1,5 @@
-use std::io::Read;
 use serde::Deserialize;
+use std::io::Read;
 use yaml_serde::Value;
 
 fn main() {
@@ -51,7 +51,7 @@ mod test {
 
     #[test]
     fn test_documents() {
-        for pairs in vec![
+        for pairs in [
             (
                 include_str!("testdata/deployment.yaml"),
                 include_str!("testdata/deployment.nix"),
